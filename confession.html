@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confession Page</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .glow-text, .message-text {
+      position: relative;
+      z-index: 2;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      color: #fff;
+      animation: glowColor 5s infinite linear;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #ff00ff;
+      padding: 0 20px;
+      margin-top: 40vh;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    @keyframes glowColor {
+      0% { color: #ff007c; text-shadow: 0 0 10px #ff007c; }
+      25% { color: #00ffe1; text-shadow: 0 0 10px #00ffe1; }
+      50% { color: #7a00ff; text-shadow: 0 0 10px #7a00ff; }
+      75% { color: #fffb00; text-shadow: 0 0 10px #fffb00; }
+      100% { color: #ff007c; text-shadow: 0 0 10px #ff007c; }
+    }
+
+    .yes-btn {
+      position: relative;
+      z-index: 2;
+      margin-top: 30px;
+      background: #ff4dd2;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 15px #ff4dd2;
+      display: inline-block;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px #ff4dd2; }
+      50% { transform: scale(1.1); box-shadow: 0 0 20px #ff99e6; }
+      100% { transform: scale(1); box-shadow: 0 0 10px #ff4dd2; }
+    }
+
+    .love-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .love-text {
+      position: absolute;
+      color: pink;
+      font-size: 18px;
+      opacity: 0.1;
+      white-space: nowrap;
+      animation: fadeMove 8s linear forwards;
+    }
+
+    @keyframes fadeMove {
+      0% {
+        opacity: 0;
+        transform: translateY(0px) scale(0.8);
+      }
+      50% {
+        opacity: 0.15;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.2);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Always active background -->
+  <div class="love-container" id="loveContainer"></div>     
+
+  <!-- Message Text -->
+  <div class="message-text" id="messageText"></div>
+
+  <!-- Final Text -->
+  <div class="glow-text" id="finalText">Will you be my girlfriend again? 💖</div>
+
+  <!-- Button -->
+  <div style="text-align: center; z-index: 2; position: relative;">
+    <button class="yes-btn" id="yesButton" onclick="alert('Yesss 💗 I’ll be the best fish ever again!')">Yes 💘</button>
+  </div>
+
+  <script>
+    const container = document.getElementById("loveContainer");
+
+    // Always-running background
+    setInterval(() => {
+      const el = document.createElement("div");
+      el.className = "love-text";
+      el.innerText = "I love you";
+      el.style.top = Math.random() * window.innerHeight + "px";
+      el.style.left = Math.random() * window.innerWidth + "px";
+      el.style.fontSize = (14 + Math.random() * 6) + "px";
+      el.style.opacity = 0.05 + Math.random() * 0.15;
+
+      container.appendChild(el);
+
+      setTimeout(() => {
+        el.remove();
+      }, 8000);
+    }, 400);
+
+    const messages = [
+      "I know I made a lot of mistake",
+      "I know I always dumb dumb",
+      "I'm really sorry I broke your heart",
+      "I will be better next time",
+      "You're my everything in this life",
+      "I love you moreeeeee",
+      "No matter what happen, I will always choose you"
+    ];
+
+    const messageText = document.getElementById("messageText");
+    const finalText = document.getElementById("finalText");
+    const yesButton = document.getElementById("yesButton");
+
+    finalText.style.opacity = 0;
+    yesButton.style.opacity = 0;
+
+    let i = 0;
+
+    function showNextMessage() {
+      if (i < messages.length) {
+        messageText.innerText = messages[i];
+        messageText.style.opacity = 1;
+
+        setTimeout(() => {
+          messageText.style.opacity = 0;
+          setTimeout(() => {
+            i++;
+            showNextMessage();
+          }, 1000); // wait for fade out
+        }, 2500); // how long it shows before fading
+      } else {
+        // Hide messageText so final elements aren't blocked
+        messageText.style.display = "none";
+
+        // Show final text and button with fade-in
+        finalText.style.display = "block";
+        yesButton.style.display = "inline-block";
+        setTimeout(() => {
+          finalText.style.opacity = 1;
+          yesButton.style.opacity = 1;
+        }, 100);
+      }
+    }
+
+    window.onload = showNextMessage;
+  </script>
+</body>
+</html>
