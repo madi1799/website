@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Memories Part 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffeaf1;
+      color: #444;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d94f70;
+      font-size: 24px;
+      margin-bottom: 25px;
+    }
+    .ig-title {
+  font-family: 'Lobster', cursive;
+  font-size: 2.5em;
+  color: #000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+    /* Story Section */
+    .story-section {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 10px 0 20px 0;
+    }
+
+    .story-section::-webkit-scrollbar {
+      display: none;
+    }
+
+    .story {
+      flex: 0 0 auto;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid #ff96b0;
+      overflow: hidden;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .story:hover {
+      transform: scale(1.05);
+    }
+
+    .story img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Gallery / Feed */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .memory {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .memory img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .caption {
+      padding: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Popup Overlay */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-image {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Next Button */
+    .next-btn {
+      display: block;
+      width: fit-content;
+      margin: 40px auto 10px auto;
+      padding: 12px 28px;
+      font-size: 16px;
+      background: #ff96b0;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+    }
+    
+    .mute-btn {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     background: #fff1f5;
+     border: none;
+     border-radius: 50%;
+     font-size: 1.2rem;
+     padding: 10px;
+     cursor: pointer;
+     box-shadow: 0 0 10px #ffabc2;
+    }
+
+    .next-btn:hover {
+      background: #f06a8b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="ig-title">Our Memories - Part 1</h1>
+
+  <!-- Story Section -->
+  <div class="story-section">
+    <div class="story" onclick="openPopup('assets/story1.png')"><img src="assets/story1.png" alt="Story 1"></div>
+    <div class="story" onclick="openPopup('assets/story2.png')"><img src="assets/story2.png" alt="Story 2"></div>
+    <div class="story" onclick="openPopup('assets/story3.png')"><img src="assets/story3.png" alt="Story 3"></div>
+    <div class="story" onclick="openPopup('assets/story4.png')"><img src="assets/story4.png" alt="Story 4"></div>
+    <div class="story" onclick="openPopup('assets/story5.png')"><img src="assets/story5.png" alt="Story 5"></div>
+  </div>
+
+  <!-- Gallery Section -->
+<div class="gallery">
+  <div class="memory">
+    <img src="assets/image1.png" alt="Memory 1" onclick="openPopup('assets/image1.png')">
+    <div class="caption">"This was our first selfie hehe, I’ll always remember it, time tu malu malu lagi sikit ."</div>
+  </div>
+
+  <div class="memory">
+    <img src="assets/image2.png" alt="Memory 2" onclick="openPopup('assets/image2.png')">
+    <div class="caption">"this pula we go tengok mobie fast and furious , hehehe happy nampak"</div>
+  </div>
+
+  <div class="memory">
+    <img src="assets/image3.png" alt="Memory 3" onclick="openPopup('assets/image3.png')">
+    <div class="caption">"time ni we go dewan tu ada event , hahaha manyak mamam , and think this lah first time kali me termamam oink oink "</div>
+  </div>
+</div>
+<audio id="bgMusic" loop autoplay>
+      <source src="assets/bg-music.mp3" type="audio/mp3" />
+    </audio>
+    <button class="mute-btn" onclick="toggleMusic()">🔊</button>
+  <script>
+    function openPopup(src) {
+      const popup = document.getElementById('popupOverlay');
+      const img = document.getElementById('popupImage');
+      img.src = src;
+      popup.classList.add('active');
+    }
+
+    function closePopup() {
+      document.getElementById('popupOverlay').classList.remove('active');
+    }
+    function toggleMusic() {
+  const audio = document.getElementById("bgMusic");
+  const btn = document.querySelector(".mute-btn");
+  
+  if (audio.paused) {
+    audio.play();
+    btn.textContent = "🔊";
+  } else {
+    audio.pause();
+    btn.textContent = "🔇";
+  }
+}
+  </script>
+  <div class="popup-overlay" id="popupOverlay" onclick="closePopup()">
+  <img id="popupImage" class="popup-image" src="" alt="Popup Image">
+</div>
+<div style="text-align: center; margin: 40px 0;">
+  <a href="gallery-part2.html" class="next-btn">Next →</a>
+</div>
+
+</body>
+</html>

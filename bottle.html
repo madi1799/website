@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message in a Bottle</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 430px;
+      margin: auto;
+    }
+
+    .bottle-wrapper {
+      position: absolute;
+      width: 200px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-10deg);
+      animation: float 4s ease-in-out infinite;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .bottle {
+      width: 100%;
+    }
+
+    @keyframes float {
+      0% { transform: translate(-50%, -50%) rotate(-10deg) translateY(0); }
+      50% { transform: translate(-50%, -50%) rotate(-10deg) translateY(-10px); }
+      100% { transform: translate(-50%, -50%) rotate(-10deg) translateY(0); }
+    }
+
+    .letter-popup {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ECE5E5;
+      padding: 30px 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 350px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+      text-align: center;
+      z-index: 10;
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    .letter-text {
+      color: red;
+      font-size: 14px;
+      margin-top: 20px;
+      background-color: #ECE5E5;
+    }
+
+    .letter-bottle{
+      color: red;
+      font-size: 20px;
+      margin-top: 25px;
+      background-color: black;
+    }
+
+    .letter-img {
+      width: 150px;
+    }
+    .next-btn {
+  display: none;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff6b81;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="bottle-wrapper" id="bottleWrapper">
+      <img src="assets/bottle.png" class="bottle" alt="bottle" />
+      <p class="letter-bottle"> Open me hehehe</p>
+    </div>
+
+    <div class="letter-popup" id="letterPopup">
+      <img src="assets/love.gif" class="letter-img" alt="letter" />
+      <p class="letter-text">
+        143 🖤<br>
+        "I put my heart in this bottle, and the waves brought it to you."
+      </p>
+      <a href="polaroid.html">
+  <button class="next-btn" id="nextBtn">Next</button>
+</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("bottleWrapper").addEventListener("click", () => {
+      document.getElementById("letterPopup").style.display = "block";
+      document.getElementById("bottleWrapper").style.display = "none";
+    });
+    const bottle = document.getElementById("bottleWrapper");
+  const letter = document.getElementById("letterPopup");
+  const nextBtn = document.getElementById("nextBtn");
+
+  bottle.addEventListener("click", () => {
+    letter.style.display = "block";
+    bottle.style.display = "none";
+
+    // Show Next Button after 3 seconds
+    setTimeout(() => {
+      nextBtn.style.display = "inline-block";
+    }, 5000);
+  });
+  </script>
+
+</body>
+</html>

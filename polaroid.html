@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polaroid Shake</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: #191818;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .polaroid-container {
+      position: relative;
+      width: 80vw;
+      max-width: 340px;
+      aspect-ratio: 3/4;
+      margin-bottom: 20px;
+    }
+
+    .polaroid-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: opacity 2s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .caption {
+      opacity: 0;
+      font-size: 18px;
+      text-align: center;
+      padding: 0 20px;
+      color: #d63384;
+      transition: opacity 2s ease;
+      #hintCaption {
+  transition: opacity 1s ease;
+}
+
+    }
+
+    .next-btn {
+      margin-top: 20px;
+      opacity: 0;
+      padding: 10px 25px;
+      background: #ff87b4;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: opacity 1s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .next-btn.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="polaroid-container">
+    <img src="assets/polaroid-blurry.png" class="polaroid-img" id="blurry">
+    <img src="assets/polaroid-clear.png" class="polaroid-img" id="clear" style="opacity: 0;">
+  </div>
+  <div class="caption" id="hintCaption" style="opacity: 1; font-size: 14px; color: #aaa;">Click or shake it 📸</div>
+
+
+  <div class="caption" id="caption"> you you allways tomey tomey💖</div>
+
+  <button class="next-btn" id="nextBtn" onclick="location.href='firework.html'">Next</button>
+
+  <script>
+    const blurry = document.getElementById('blurry');
+    const clear = document.getElementById('clear');
+    const caption = document.getElementById('caption');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let revealed = false;
+
+    function revealPolaroid() {
+      if (revealed) return;
+      revealed = true;
+      document.getElementById('hintCaption').style.opacity = 0;
+
+
+      blurry.style.opacity = 0;
+      clear.style.opacity = 1;
+      caption.style.opacity = 1;
+
+      setTimeout(() => {
+        nextBtn.classList.add("show");
+      }, 3000);
+    }
+
+    // Trigger by tap
+    document.body.addEventListener("click", revealPolaroid);
+
+    // Optional: Motion shake detection
+    window.addEventListener("devicemotion", (e) => {
+      if (e.accelerationIncludingGravity && Math.abs(e.accelerationIncludingGravity.x) > 15) {
+        revealPolaroid();
+      }
+    });
+  </script>
+
+</body>
+</html>

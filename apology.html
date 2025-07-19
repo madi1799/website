@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Apology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300; /* Light */
+  font-size: 16px;  /* Smaller for fit */
+  line-height: 1.6;
+  color: white;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(ellipse at top, #1e1e3f, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+    .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+
+.letter-box {
+  max-width: 90%;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #ffabc2;
+  text-align: center;
+  font-size: 14px; /* Slightly smaller */
+  line-height: 1.6;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 1.5s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+  
+}
+
+    @keyframes pulseBorder {
+      0% { border-image-source: linear-gradient(45deg, #ff6ec4, #7873f5, #42caff); }
+      50% { border-image-source: linear-gradient(45deg, #42caff, #ff6ec4, #7873f5); }
+      100% { border-image-source: linear-gradient(45deg, #ff6ec4, #7873f5, #42caff); }
+    }
+
+    .title {
+      font-size: 1.8em;
+      font-weight: 600;
+      text-shadow: 0 0 5px #fff;
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.7);
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+    }
+
+    /* Optional floating hearts */
+ .hearts {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: -30px; /* Start below screen */
+  left: 50%;
+  background-color: pink;
+  transform: rotate(45deg);
+  animation: floatUp 8s linear infinite;
+  opacity: 0.2;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: pink;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(45deg) scale(0.8);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(135deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+    .mute-btn {
+     position: absolute;
+     top: 20px;
+     right: 20px;
+     background: #fff1f5;
+     border: none;
+     border-radius: 50%;
+     font-size: 1.2rem;
+     padding: 10px;
+     cursor: pointer;
+     box-shadow: 0 0 10px #ffabc2;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Please Read This...</div>
+    
+    <div class="letter-box">
+      I know I messed up.  
+      I know I hurt you in ways I can't fully explain.  
+      But I never stopped loving you, not even for a second.  
+      <br><br>
+      I don’t want you to feel pressured.  
+      I just want you to know that I’m still here for you 
+      the same person who called you cute every day,  
+      who never stopped looking at you like the most special person in the world.  
+      <br><br>
+      If I could turn back time, I would fix everything.  
+      But since I can’t, let me prove it to you with what I still have:  
+      My love. My effort. My whole heart.  
+      <br><br>
+      No matter what happens…  
+      You’ll always be the most precious person in my life.  
+      You always have that special place in my heart.
+    </div>
+
+ <audio id="bgMusic" loop autoplay>
+      <source src="assets/bg-music.mp3" type="audio/mp3" />
+    </audio>
+    <button class="mute-btn" onclick="toggleMusic()">🔊</button>
+<script src="script.js">
+</script>
+
+   <a href="gallery-part1.html" class="back-btn">Next</a>
+
+
+    <!-- Optional floating hearts -->
+   <div class="hearts">
+  <!-- Add more if you want denser rain -->
+  <div class="heart" style="left: 5%; animation-delay: 0s; animation-duration: 3s;"></div>
+  <div class="heart" style="left: 12%; animation-delay: 2s; animation-duration: 6s;"></div>
+  <div class="heart" style="left: 20%; animation-delay: 1s; animation-duration: 3s;"></div>
+  <div class="heart" style="left: 30%; animation-delay: 3s; animation-duration: 8s;"></div>
+  <div class="heart" style="left: 40%; animation-delay: 0.5s; animation-duration: 8s;"></div>
+  <div class="heart" style="left: 55%; animation-delay: 1.5s; animation-duration: 6.5s;"></div>
+  <div class="heart" style="left: 65%; animation-delay: 0.3s; animation-duration: 6.5s;"></div>
+  <div class="heart" style="left: 75%; animation-delay: 2.5s; animation-duration: 7.5s;"></div>
+  <div class="heart" style="left: 85%; animation-delay: 1.2s; animation-duration: 8.2s;"></div>
+  <div class="heart" style="left: 95%; animation-delay: 3s; animation-duration: 6.8s;"></div>
+</div>
+
+
+  </div>
+</body>
+</html>
+
+

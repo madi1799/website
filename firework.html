@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fireworks Finale</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ✅ Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      overflow: hidden;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .center-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff5fa;
+      font-size: 40px;
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      text-shadow:
+        0 0 5px #ff97c2,
+        0 0 10px #ff73b6,
+        0 0 20px #ff4a9c,
+        0 0 40px #ff0090;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards 1s;
+    }
+
+    .next-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 25px;
+      background: #ff87b4;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .next-btn.show {
+      opacity: 1;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="fireworksCanvas"></canvas>
+
+<div class="center-message">You’re my light, no matter how dark it gets 💖</div>
+<button class="next-btn" id="nextBtn" onclick="location.href='confession.html'">Next</button>
+
+<audio id="fireworkSound" autoplay muted loop playsinline>
+  <source src="assets/firework.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const canvas = document.getElementById('fireworksCanvas');
+  const ctx = canvas.getContext('2d');
+  let W = window.innerWidth;
+  let H = window.innerHeight;
+  canvas.width = W;
+  canvas.height = H;
+
+  let fireworks = [];
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function Firework(x, y) {
+    this.x = x;
+    this.y = y;
+    this.particles = [];
+
+    for (let i = 0; i < 100; i++) {
+      this.particles.push({
+        x: x,
+        y: y,
+        radius: 2,
+        color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+        angle: Math.random() * 2 * Math.PI,
+        speed: random(2, 5),
+        alpha: 1,
+        decay: random(0.01, 0.03)
+      });
+    }
+  }
+
+  Firework.prototype.update = function() {
+    this.particles.forEach(p => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.alpha -= p.decay;
+    });
+    this.particles = this.particles.filter(p => p.alpha > 0);
+  }
+
+  Firework.prototype.draw = function(ctx) {
+    this.particles.forEach(p => {
+      ctx.globalAlpha = p.alpha;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+    });
+  }
+
+  function loop() {
+    ctx.globalAlpha = 0.1;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+
+    if (Math.random() < 0.05) {
+      fireworks.push(new Firework(random(100, W - 100), random(100, H - 200)));
+    }
+
+    fireworks.forEach(fw => {
+      fw.update();
+      fw.draw(ctx);
+    });
+
+    fireworks = fireworks.filter(fw => fw.particles.length > 0);
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+
+  // Show next button after 5 seconds
+  setTimeout(() => {
+    document.getElementById("nextBtn").classList.add("show");
+  }, 5000);
+
+  // Update canvas on resize
+  window.addEventListener("resize", () => {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+  });
+    // Try autoplay on load (desktop browsers)
+  window.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('fireworkSound');
+    audio.play().catch(() => {});
+  });
+
+  // For mobile: unmute and play on first user interaction
+  window.addEventListener('click', () => {
+    const audio = document.getElementById('fireworkSound');
+    audio.muted = false;
+    audio.play().catch(() => {});
+  }, { once: true });
+</script>
+
+</body>
+</html>

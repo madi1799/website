@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: radial-gradient(ellipse at top, #1e1e3f, #000);
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 1.6rem;
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+.main-image {
+  width: 200px;
+  margin: 20px 0;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 192, 203, 0.6);
+  animation: float 3s ease-in-out infinite;
+}
+
+.enter-btn {
+  background: linear-gradient(45deg, #ff8fa3, #ffcad4);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff8fa3;
+  transition: 0.3s;
+}
+
+.enter-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffc0cb;
+}
+
+.mute-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fff1f5;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ffabc2;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.image-wrapper {
+  padding: 8px;
+  border-radius: 25px;
+  background: linear-gradient(270deg, #ff8fa3, #ffc0cb, #caa8f5, #90e0ef, #ff8fa3);
+  background-size: 600% 600%;
+  animation: borderFlow 8s ease infinite;
+  display: inline-block;
+  box-shadow: 0 0 20px rgba(255, 192, 203, 0.4);
+}
+
+.main-image {
+  width: 200px;
+  border-radius: 20px;
+  display: block;
+}
+
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.glow-text {
+  font-family: 'Pacifico', cursive; /* or 'Poppins', sans-serif */
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ffc0cb,
+    0 0 15px #caa8f5,
+    0 0 20px #90e0ef;
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0% { text-shadow: 0 0 5px #fff, 0 0 10px #ff99cc, 0 0 15px #ff99cc, 0 0 20px #ff66b2; }
+  50% { text-shadow: 0 0 8px #fff, 0 0 15px #ffccff, 0 0 25px #ff99cc, 0 0 30px #ff66b2; }
+  100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff99cc, 0 0 15px #ff99cc, 0 0 20px #ff66b2; }
+}
